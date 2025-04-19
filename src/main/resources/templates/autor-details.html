@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Author Details</title>
 </head>
 <body>
-$END$
+<h1 th:text="'Автор: ' + ${author.name}"></h1>
+
+<div th:if="${not #lists.isEmpty(author.books)}">
+  <h2>Книги:</h2>
+  <ul>
+    <li th:each="book : ${author.books}">
+      <a th:href="@{/books/{id}(id=${book.id})}"
+         th:text="${book.title}"></a>
+    </li>
+  </ul>
+</div>
+
+<a th:href="@{/books}">Вернуться к списку книг</a>
 </body>
 </html>
